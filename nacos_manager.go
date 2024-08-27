@@ -2,13 +2,14 @@ package nacos_viper_remote
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/nacos-group/nacos-sdk-go/clients"
 	"github.com/nacos-group/nacos-sdk-go/clients/config_client"
 	"github.com/nacos-group/nacos-sdk-go/common/constant"
 	"github.com/nacos-group/nacos-sdk-go/common/logger"
 	"github.com/nacos-group/nacos-sdk-go/vo"
 	"github.com/spf13/viper"
-	"strings"
 )
 
 type nacosConfigManager struct {
@@ -33,6 +34,8 @@ func NewNacosConfigManager(option *Option) (*nacosConfigManager, error) {
 		RotateTime:          "1h",
 		MaxAge:              3,
 		LogLevel:            "info",
+		LogDir:              option.LogDir,
+		CacheDir:            option.CacheDir,
 	}
 
 	if option.Auth != nil && option.Auth.Enable {

@@ -7,6 +7,8 @@ type Option struct {
 	GroupName   string `mapstructure:"group"`
 	Config      Config `mapstructure:"configserver"`
 	Auth        *Auth  `mapstructure:"auth"`
+	LogDir      string `mapstructure:"logdir"`
+	CacheDir    string `mapstructure:"cachedir"`
 }
 
 type Config struct {

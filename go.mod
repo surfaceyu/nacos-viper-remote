@@ -1,4 +1,4 @@
-module github.com/yoyofxteam/nacos-viper-remote
+module github.com/surfaceyu/nacos-viper-remote
 
 go 1.14
 

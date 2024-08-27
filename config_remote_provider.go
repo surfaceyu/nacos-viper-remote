@@ -3,6 +3,7 @@ package nacos_viper_remote
 import (
 	"bytes"
 	"fmt"
+
 	"github.com/spf13/viper"
 )
 
@@ -22,26 +23,21 @@ func (provider *ViperRemoteProvider) GetProvider(runtimeViper *viper.Viper) *vip
 	err := runtimeViper.Sub(provider.configSet).Unmarshal(&option)
 	if err != nil {
 		panic(err)
-		return nil
 	}
 	SetOptions(option)
 	remote_viper := viper.New()
-	err = remote_viper.AddRemoteProvider("nacos", "localhost", "")
+	_ = remote_viper.AddRemoteProvider("nacos", "localhost", "")
 	if provider.configType == "" {
 		provider.configType = "yaml"
 	}
 	remote_viper.SetConfigType(provider.configType)
 	err = remote_viper.ReadRemoteConfig()
 	if err == nil {
-		//err = remote_viper.WatchRemoteConfigOnChannel()
-		if err == nil {
-			fmt.Println("used remote viper")
-			return remote_viper
-		}
+		fmt.Println("used remote viper")
+		return remote_viper
 	} else {
 		panic(err)
 	}
-	return runtimeViper
 }
 
 func (provider *ViperRemoteProvider) WatchRemoteConfigOnChannel(remoteViper *viper.Viper) <-chan bool {
